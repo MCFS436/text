@@ -4,12 +4,12 @@
 #include "windows.h"
 using namespace std;
 float sjd[2][20];
-double dx,dy,x=7.5,y=0.9,pa=.01f,pb=.1f,sumy;
+double dx,dy,x=0,y=0,pa=.01f,pb=.01f,sumy;
 bool once=0;
 float loss(){
     float sum=0;
     for(int ai=0;ai<20;ai++){
-        sum+=((sjd[1][ai]-sjd[0][ai]*x-y)*(sjd[1][ai]-sjd[0][ai]*x-y));//L2¦»loss
+        sum+=((sjd[1][ai]-sjd[0][ai]*x-y)*(sjd[1][ai]-sjd[0][ai]*x-y));//L2îž‡loss
     }
     sum/=20;
     //cout<<sum;
@@ -24,7 +24,7 @@ float loss(){
         pb=pb/10;
         once=1;
     }
-    cout<<sum<<" "<<endl;
+    cout<<"loss:"<<sum<<" "<<endl;
     return sum;
 }
 double ds;
@@ -34,7 +34,7 @@ int main(){
         cin>>sjd[0][ai]>>sjd[1][ai];
     }
     
-    while(loss()>.01f){
+    while(loss()>.001f){
     	dx=0;
     	dy=0;
         for(int ai=0;ai<20;ai++){
@@ -52,5 +52,5 @@ int main(){
         //Sleep(1000);
     }
     cout<<x<<" "<<y;
-    return 0;
+    return 0; 
 } 
